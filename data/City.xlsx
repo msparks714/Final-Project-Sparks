@@ -1,0 +1,28 @@
+nyc: {
+  center: {lat , lng: },
+  total_population:
+  native_population:
+},
+
+phoenix: {
+  center: {lat , lng: },
+  total_population:
+  native_population:
+
+  anchorage: {
+    center: {lat , lng: },
+    total_population:
+    native_population:
+  },
+
+  Los Angeles: {
+    center: {lat , lng: },
+    total_population:
+    native_population:
+  },
+
+  Oklahoma City: {
+    center: {lat , lng: },
+    total_population:
+    native_population:
+  };

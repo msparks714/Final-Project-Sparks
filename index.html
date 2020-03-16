@@ -1,0 +1,90 @@
+<!Doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>NAIA Residents</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='css/styles.css' rel='stylesheet' />
+  </head>
+  <body>
+
+    <!-- this is the map container-->
+      <div id='map-container'></div>
+
+      <!-- Load mapboxGL, jQuery, then our local javascript files -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+        <script
+          src="https://code.jquery.com/jquery-3.4.1.min.js"
+          integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+          crossorigin="anonymous"></script>
+        <script src='js/scripts.js'></script>
+
+        <body>
+            <div id="map"></div>
+            <script>
+              // This example creates circles on the map, representing populations in North
+              // America.
+
+              // First, create an object containing LatLng and population for each city.
+              var citymap = {
+                nyc: {
+                  center: {lat , lng: },
+                  total_population:
+                  native_population:
+                },
+
+                phoenix: {
+                  center: {lat , lng: },
+                  total_population:
+                  native_population:
+
+                  anchorage: {
+                    center: {lat , lng: },
+                    total_population:
+                    native_population:
+                  },
+
+                  Los Angeles: {
+                    center: {lat , lng: },
+                    total_population:
+                    native_population:
+                  },
+
+                  Oklahoma City: {
+                    center: {lat , lng: },
+                    total_population:
+                    native_population:
+                  };
+
+              function initMap() {
+                // Create the map.
+                var map = new google.maps.Map(document.getElementById('map'), {
+                  zoom: 4,
+                  center: {lat: 37.090, lng: -95.712},
+                  mapTypeId: 'terrain'
+                });
+
+                // Construct the circle for each value in citymap.
+                // scale the area of the circle based on the population.
+                for (var city in citymap) {
+                  // Add the circle for this city to the map.
+                  var cityCircle = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: citymap[city].center,
+                    radius: Math.sqrt(citymap[city].population) * 100
+                  });
+                }
+              }
+            </script>
+            <script async defer
+            src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'">
+            </script>
+      </body>
+    </html>
