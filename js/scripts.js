@@ -36,13 +36,16 @@ map.on('style.load', function() {
     map.addLayer({
       id: 'fill-Res',
       type: 'fill',
-      source: 'Res',
+      source: 'Res.geojson',
       paint: {
         'fill-color': {
           type: 'categorical',
           property: 'MAIL_NAME',
           stops:
-          ["Coordinates", "#f00"]
+          ["Osage Tribe, "#FFF"],
+          ["Seneca-Cayuga Tribe", #FFF],
+        ]
+
         }
       }
     })
@@ -55,5 +58,20 @@ map.on('style.load', function() {
         features: []
       }
     })
+    //add each city as a circle
+    map.on('load', function() {
+      //add source
+      map.addSource('pointssource', {
+        type: 'json',
+        data: 'cities.json'
+      });
 
+      //add popup when hover to show more information
+      var popup = new mapboxgl.Popup({});
+
+      map.on('mouseenter', 'cities', function(e) {
+        map.getCanvas().style.cursor = 'pointer';
+      })
+
+    })
 })

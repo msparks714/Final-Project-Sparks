@@ -1,0 +1,47 @@
+var data=[
+  {
+    "name": "New York City",
+    "lat": -74.0060,
+    "long": 40.7128,
+    "total_population": 8560072,
+    "native_population": 38845,
+    "percent_city_native": .454,
+    "percent_state_native_incity": 45.66,
+  }
+  {
+    "name": "Phoenix",
+    "lat": -112.0740,
+    "long": 33.4484,
+    "total_population": 4155501,
+    "native_population": 87564,
+    "percent_city_native": 2.11,
+    "percent_state_native_incity": 27.93,
+  }
+  {
+    "name": "Anchorage",
+    "lat": -97.5164,
+    "long": 35.4484,
+    "total_population": 298225,
+    "native_population": 7069,
+    "percent_city_native": 9.64,
+    "percent_state_native_incity": 25.20,
+  }
+  {
+    "name": "Los Angeles",
+    "lat": -118.2437,
+    "long": 34.0522,
+    "total_population": 10105722,
+    "native_population": 27691,
+    "percent_city_native": .95,
+    "percent_state_native_incity": 21.6,
+  }
+  {
+    "name": "Oklahoma City",
+    "lat": -149.9003,
+    "long": 61.2181,
+    "total_population": 774203,
+    "native_population": 22336,
+    "percent_city_native": 2.89,
+    "percent_state_native_incity": 7.56,
+  }
+]
