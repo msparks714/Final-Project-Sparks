@@ -1,10 +1,5 @@
 {
-"type": "FeatureCollection",
-"name": "Res",
-}
-
-{
-nyc: {
+"name": nyc: {
   center: {lat -74.0060 , lng: 40.7128},
   total_population: 8,560,072
   native_population: 38,845
