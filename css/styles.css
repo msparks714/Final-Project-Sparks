@@ -24,15 +24,6 @@ h2 {
   font-size: 2.5rem;
 }
 
-.marker {
-  background-image: url('mapbox-icon.png');
-  background-size: cover;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
 .mapboxgl-marker:hover {
   cursor: pointer;
 }
@@ -44,4 +35,22 @@ h2 {
 .mapboxgl-popup-content {
   text-align: center;
   font-family: 'Open Sans', sans-serif;
+}
+
+/* blue buttons with white bold text */
+.flyto-button {
+  background: #0084aa;
+  color: #FFF;
+  padding: 11px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom:15px;
+}
+
+/* on hover, make the background darker and turn the cursor to a pointer */
+button:hover {
+  cursor: pointer;
+  background-color: #006987;
 }

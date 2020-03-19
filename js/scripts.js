@@ -5,6 +5,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXNwYXJrczcxNCIsImEiOiJjazZsZjl0aXAwYmMzM21uM
 var initialCenterPoint = [-95.303102, 40.832078]
 var initialZoom = 3.35
 
+// create an object to hold the initialization options for a mapboxGL map
+var initOptions = {
+  container: 'map-container', // put the map in this container
+  style: 'mapbox://styles/mapbox/light-v10', // use this basemap
+  center: initialCenterPoint, // initial view center
+  zoom: initialZoom, // initial view zoom level (0-18)
+}
+
 // create the new map
 var map = new mapboxgl.Map(initOptions);
 
@@ -33,67 +41,19 @@ map.on('style.load', function() {
         'fill-color': {
           type: 'categorical',
           property: 'MAIL_NAME',
-
+          stops:
+          ["Coordinates", "#f00"]
         }
       }
     })
 
-    var geojson = {
-  type: 'FeatureCollection',
-  features: [{
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-97.5164, 35.4676]
-    },
-    properties: {
-      title: 'Mapbox',
-      description: 'Anchorage, AK'
-    }
-  },
-  {
-    type: 'Feature',
-    geometry: {
-      type: 'Point',
-      coordinates: [-112.0740, 33.4484]
-    },
-    properties: {
-      title: 'Mapbox',
-      description: 'Phoenix, AZ'
-    }
-  }]
-};
-{
-  type: 'Feature',
-  geometry: {
-    type: 'Point',
-    coordinates: [-118.2437, 34.0522]
-  },
-  properties: {
-    title: 'Mapbox',
-    description: 'Los Angeles, California'
-  }
-}]
-};{
-  type: 'Feature',
-  geometry: {
-    type: 'Point',
-    coordinates: [-74.0060, 40.7128]
-  },
-  properties: {
-    title: 'Mapbox',
-    description: 'NYC, NY'
-  }
-}]
-};{
-  type: 'Feature',
-  geometry: {
-    type: 'Point',
-    coordinates: [-149.9003, 61.2181]
-  },
-  properties: {
-    title: 'Mapbox',
-    description: 'Oklahoma City, OK'
-  }
-}]
-};
+    // add an empty data source, which we will use to highlight the lot the user is hovering over
+    map.addSource('highlight-feature', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: []
+      }
+    })
+
+})
