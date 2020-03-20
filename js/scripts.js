@@ -62,7 +62,6 @@ map.addSource('Res', {
       }
     })
 
-    //add each city as a circle
 
       //add source
       map.addSource('cities.geojson', {
@@ -70,6 +69,7 @@ map.addSource('Res', {
         data: 'data/cities.geojson'
       });
 
+  //add each city as a sprite
   map.on('load', function() {
       map.addSource('points', {
       'type': 'geojson',
@@ -83,7 +83,6 @@ map.addSource('Res', {
           'type': 'Point',
           'coordinates':
             [-97.5164, 35.4676]
-
       },
       'properties': {
         'title': 'Oklahoma City',
@@ -157,5 +156,49 @@ map.addSource('Res', {
     }
     });
     });
+
+    // event listeners for the fly to buttons
+
+    $('#oklahomacity').on('click', function() {
+      map.flyTo({
+        center: [-97.5164, 35.4676],
+        zoom: initialZoom
+      })
+    })
+
+    $('#nyc').on('click', function() {
+
+      var nycLngLat = [-74.006, 40.7128]
+
+      map.flyTo({
+        center: nycLngLat,
+        zoom: initialZoom
+      })
+    })
+
+    $('#phoenix').on('click', function() {
+      var phoenixLngLat = [-112.074,	33.4484]
+
+      map.flyTo({
+        center: phoenixLngLat,
+        zoom: initialZoom
+      })
+    })
+    $('#losangeles').on('click', function() {
+      var losangelesLngLat = [-118.2437,34.0522]
+
+      map.flyTo({
+        center: losangelesLngLat,
+        zoom: initialZoom
+      })
+    })
+    $('#anchorage').on('click', function() {
+        var anchorageLngLat = [-149.003,61.2181]
+
+        map.flyTo({
+          center: anchorageLngLat,
+          zoom: initialZoom
+        })
+      })
 
   })

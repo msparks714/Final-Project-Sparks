@@ -9,18 +9,45 @@
     <link href='css/styles.css' rel='stylesheet' />
   </head>
   <body>
-  
+
 
     <!-- this is the map container-->
       <div id='map-container'></div>
 
-      <!-- Load mapboxGL, jQuery, then our local javascript files -->
+    <!-- Load mapboxGL, jQuery, then our local javascript files -->
         <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
         <script
           src="https://code.jquery.com/jquery-3.4.1.min.js"
           integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
           crossorigin="anonymous"></script>
         <script src='js/scripts.js'></script>
+
+    <!-- the sidebar is fixed width and will contain a title, some text, and buttons -->
+       <div id='sidebar'>
+          <h3>Native American Populations in the US and on Reservations</h3>
+
+           <p>Ever wonder how many registeres tribe members live on a reservation?</p>
+
+           <p>Explore the top 5 cities that Native Americans, by number, live in.</p>
+
+           <hr/>
+
+           <br/>
+           <!-- Buttons for flying the map -->
+           <button class='flyto-button' id="losangeles ">✈️ Los Angeles, CA/button>
+           <br/>
+
+           <button class='flyto-button' id="anchorage">✈️ Anchorage, AK</button>
+           <br/>
+
+           <button class='flyto-button' id="oklahomacity">✈️ OKC,OK</button>
+           <br/>
+
+           <button class='flyto-button' id="Phoenix">✈️ Phoenix, AZ</button>
+           <br/>
+
+           <button class='flyto-button' id="nyc">🗽 NYC, NY</button>
+           </div>
 
         <body>
       </html>
