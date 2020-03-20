@@ -54,3 +54,23 @@ button:hover {
   cursor: pointer;
   background-color: #006987;
 }
+
+.marker {
+  background-image: url('mapbox-icon.png');
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+#infoBar {
+    color: #fff;
+    position: absolute;
+    border: 0px solid #9b9b9b;
+    left: calc(50% - 210px);
+    width: 420px;
+    height: 100%;
+    z-index: 70002;
+    text-align: left;
+    border: 0px dashed #000;
+    background-color: rgba(0, 0, 0, 0.5);

@@ -16,16 +16,21 @@ var initOptions = {
 // create the new map
 var map = new mapboxgl.Map(initOptions);
 
+
 // add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
 // wait for the initial style to Load
 map.on('style.load', function() {
-  //add a layer for your custom source//
-  map.addSource('Res', {
+
+
+//add a layer for your custom source//
+map.addSource('Res', {
     type:'geojson',
     data:'data/Res.geojson',
   });
+
+
 
   // let's make sure the source got added by logging the current map state to the console
     console.log(map.getStyle().sources)
@@ -56,32 +61,101 @@ map.on('style.load', function() {
         features: []
       }
     })
+
     //add each city as a circle
-    map.on('load', function() {
+
       //add source
-      map.addSource('pointssource', {
-        type: 'json',
-        data: 'cities.json'
+      map.addSource('cities.geojson', {
+        type: 'geojson',
+        data: 'data/cities.geojson'
       });
 
-      //add popup when hover to show more information
-      var popup = new mapboxgl.Popup({});
+  map.on('load', function() {
+      map.addSource('points', {
+      'type': 'geojson',
+      'data': {
+      'type': 'FeatureCollection',
+      'features': [
+      {
+  // feature for OKC
+      'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates':
+            [-97.5164, 35.4676]
 
-      map.on('mouseenter', 'cities', function(e) {
-        map.getCanvas().style.cursor = 'pointer';
-      })
+      },
+      'properties': {
+        'title': 'Oklahoma City',
+        'icon': 'monument'
+          }
+        },
+  {
+  // feature for NYC
+      'type': 'Feature',
+        'geometry': {
+            'type': 'Point',
+              'coordinates': [-74.006,	40.7128]
+      },
+      'properties': {
+        'title': 'NYC',
+        'icon': 'harbor'
+        }
+      },
+    {
+      // feature for Anchorage
+          'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                  'coordinates': [-149.003,	61.2181]
+          },
+          'properties': {
+            'title': 'Anchorage',
+            'icon': 'airport'
+          }
+        },
+      {
+          // feature for Phoenix
+              'type': 'Feature',
+                'geometry': {
+                    'type': 'Point',
+                      'coordinates': [-112.074,	33.4484]
+              },
+              'properties': {
+                'title': 'Phoenix',
+                'icon': 'bicycle'
+              }
+            },
+          {
+              // feature for Los Angeles
+                  'type': 'Feature',
+                    'geometry': {
+                        'type': 'Point',
+                          'coordinates': [-118.2437,	34.0522]
+                  },
+                  'properties': {
+                    'title': 'Los Angeles',
+                    'icon': 'airport'
+                  }
+                  }
+      ]
+      }
+    });
+    map.addLayer({
+    'id': 'points',
+    'type': 'symbol',
+    'source': 'points',
+    'layout': {
+    // get the icon name from the source's "icon" property
+    // concatenate the name to get an icon from the style's sprite sheet
+    'icon-image': ['concat', ['get', 'icon'], '-15'],
+    // get the title name from the source's "title" property
+    'text-field': ['get', 'title'],
+    'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+    'text-offset': [0, 0.6],
+    'text-anchor': 'top'
+    }
+    });
+    });
 
-    })
-// add markers to map
-data.features.forEach(function(marker) {
-
-  // create a HTML element for each feature
-  var el = document.createElement('div');
-  el.className = 'marker';
-
-  // make a marker for each feature and add to the map
-  new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .addTo(map);
-});
-})
+  })
