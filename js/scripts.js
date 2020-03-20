@@ -2,8 +2,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXNwYXJrczcxNCIsImEiOiJjazZsZjl0aXAwYmMzM21uM
 
 // we want to return to this point and zoom level after the user interacts
 // with the map, so store them in variables
-var initialCenterPoint = [-95.303102, 40.832078]
-var initialZoom = 3.35
+var initialCenterPoint = [-106.8175, 39.1911]
+var initialZoom = 3.15
 
 // create an object to hold the initialization options for a mapboxGL map
 var initOptions = {
@@ -162,7 +162,7 @@ map.addSource('Res', {
     $('#oklahomacity').on('click', function() {
       map.flyTo({
         center: [-97.5164, 35.4676],
-        zoom: initialZoom
+        zoom: 10
       })
     })
 
@@ -172,7 +172,7 @@ map.addSource('Res', {
 
       map.flyTo({
         center: nycLngLat,
-        zoom: initialZoom
+        zoom: 10
       })
     })
 
@@ -181,7 +181,7 @@ map.addSource('Res', {
 
       map.flyTo({
         center: phoenixLngLat,
-        zoom: initialZoom
+        zoom: 10
       })
     })
     $('#losangeles').on('click', function() {
@@ -189,7 +189,7 @@ map.addSource('Res', {
 
       map.flyTo({
         center: losangelesLngLat,
-        zoom: initialZoom
+        zoom: 10
       })
     })
     $('#anchorage').on('click', function() {
@@ -197,8 +197,16 @@ map.addSource('Res', {
 
         map.flyTo({
           center: anchorageLngLat,
-          zoom: initialZoom
+          zoom: 10
         })
       })
-
+  // iterate over each object in cities.geojson
+  citydata.forEach(function(data) {
+        // for each object in the cities, add a popup to the map
+        new mapboxgl.Marker()
+          .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+           .setHTML(`${data.geography} has ${data.Estimate_Total_Residents} total residents and ${data.field_7} of them are Native American.
+             That is roughly ${data.entire_state_percent} of all residents in their state.`))
+          .addTo(map);
+      })
   })

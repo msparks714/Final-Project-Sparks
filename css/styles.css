@@ -16,12 +16,25 @@ body {
   bottom: 0;
   right: 0px;
   left: 0px;
-  height: 600px;
+  height: 1000px;
 }
 
-h2 {
+/* sidebar is fixed with and positioned to the bottom left */
+#sidebar {
+  position: absolute;
+  left:0;
+  top: calc(50%-20px);
+  bottom:0;
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+h3 {
   margin-top: 10;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 
 .mapboxgl-marker:hover {
@@ -39,7 +52,7 @@ h2 {
 
 /* blue buttons with white bold text */
 .flyto-button {
-  background: #0084aa;
+  background: #DE830E;
   color: #FFF;
   padding: 11px;
   border: none;
