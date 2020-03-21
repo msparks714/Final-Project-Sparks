@@ -16,15 +16,15 @@ body {
   bottom: 0;
   right: 0px;
   left: 0px;
-  height: 1000px;
+  height: 700px;
 }
 
 /* sidebar is fixed with and positioned to the bottom left */
 #sidebar {
   position: absolute;
   left:0;
-  top: calc(50%-20px);
-  bottom:0;
+  top: 0;
+  bottom:calc(50%-20px);
   width: 300px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #FFF;
