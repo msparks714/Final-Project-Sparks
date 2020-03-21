@@ -3,7 +3,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXNwYXJrczcxNCIsImEiOiJjazZsZjl0aXAwYmMzM21uM
 // we want to return to this point and zoom level after the user interacts
 // with the map, so store them in variables
 var initialCenterPoint = [-106.8175, 39.1911];
-var initialZoom = 3.15;
+var initialZoom = 3.25;
 
 // create an object to hold the initialization options for a mapboxGL map
 var initOptions = {
@@ -39,6 +39,7 @@ map.on('style.load', function() {
       'fill-opacity': 0.8
     }
   });
+map.setPaintProperty('water','fill-color', '#9CC6D2')
 
   //add each city as a sprite
   map.addSource('points', {
@@ -177,4 +178,35 @@ map.on('style.load', function() {
              That is roughly ${data.properties.entire_state_percent} of all residents in their state.`))
       .addTo(map);
   });
-});
+
+
+
+  // if the mouse pointer is over a feature on our layer of interest
+   // take the data for that feature and display it in the sidebar
+   if (features.length > 0) {
+     map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
+
+     var hoveredFeature = features[0]
+     var featureInfo = `
+       <p><strong> Reservation Name :</strong> ${hoveredFeature.properties.MAIL_NAME}</p>
+       <p><strong> Total Population:</strong> ${hoveredFeature.properties.POP_TOT}</p>
+       <p><strong> Economic Affairs:</strong> ${hoveredFeature.ECON_SOURC}</p>
+     `
+     $('#feature-info').html(featureInfo)
+
+     // set this lot's polygon feature as the data for the highlight source
+     map.getSource('highlight-feature').setData(hoveredFeature.geometry);
+   } else {
+     // if there is no feature under the mouse, reset things:
+     map.getCanvas().style.cursor = 'default'; // make the cursor default
+
+     // reset the highlight source to an empty featurecollection
+     map.getSource('highlight-feature').setData({
+       type: 'FeatureCollection',
+       features: []
+     });
+
+     // reset the default message
+     $('#feature-info').html(defaultText)
+   }
+ })
