@@ -168,6 +168,11 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
     });
   });
 
+//sidebar hide
+$('.sidebarBtn').click(function(){
+  $('.sidebar').toggleClass('active');
+});
+
   // iterate over each object in cities.geojson
   citydata[0].features.forEach(function(data) {
     console.log(data);
@@ -180,7 +185,11 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
   });
 
 
-
+  map.on('mousemove', function (e) {
+     // query for the features under the mouse, but only in the lots layer
+     var features = map.queryRenderedFeatures(e.point, {
+         layers: ['fill-Res'],
+     });
   // if the mouse pointer is over a feature on our layer of interest
    // take the data for that feature and display it in the sidebar
    if (features.length > 0) {
@@ -210,3 +219,4 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
      $('#feature-info').html(defaultText)
    }
  })
+})
