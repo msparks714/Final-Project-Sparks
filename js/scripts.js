@@ -41,6 +41,7 @@ map.on('style.load', function() {
   });
 map.setPaintProperty('water','fill-color', '#9CC6D2')
 
+
   //add each city as a sprite
   map.addSource('points', {
     'type': 'geojson',
@@ -169,10 +170,28 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
   });
 
 //sidebar hide
-$('.sidebarBtn').click(function(){
-  $('.sidebar').toggleClass('active');
+$('sidebar').click(function(){
+  $('sidebar').toggleClass('active');
 });
 
+// When a click event occurs on a feature in the res layer, open a popup at the
+// location of the click, with description HTML from its properties.
+map.on('click', 'res-layer', function(e) {
+new mapboxgl.Popup()
+.setLngLat(e.lngLat)
+.setHTML(e.features[0].properties.IND_NAME)
+.addTo(map);
+});
+// Change the cursor to a pointer when the mouse is over the states layer.
+map.on('mouseenter', 'res-layer', function() {
+map.getCanvas().style.cursor = 'pointer';
+});
+
+// Change it back to a pointer when it leaves.
+map.on('mouseleave', 'res-layer', function() {
+map.getCanvas().style.cursor = '';
+});
+})
   // iterate over each object in cities.geojson
   citydata[0].features.forEach(function(data) {
     console.log(data);
@@ -183,40 +202,3 @@ $('.sidebarBtn').click(function(){
              That is roughly ${data.properties.entire_state_percent} of all residents in their state.`))
       .addTo(map);
   });
-
-
-  map.on('mousemove', function (e) {
-     // query for the features under the mouse, but only in the lots layer
-     var features = map.queryRenderedFeatures(e.point, {
-         layers: ['fill-Res'],
-     });
-  // if the mouse pointer is over a feature on our layer of interest
-   // take the data for that feature and display it in the sidebar
-   if (features.length > 0) {
-     map.getCanvas().style.cursor = 'pointer';  // make the cursor a pointer
-
-     var hoveredFeature = features[0]
-     var featureInfo = `
-       <p><strong> Reservation Name :</strong> ${hoveredFeature.properties.MAIL_NAME}</p>
-       <p><strong> Total Population:</strong> ${hoveredFeature.properties.POP_TOT}</p>
-       <p><strong> Economic Affairs:</strong> ${hoveredFeature.ECON_SOURC}</p>
-     `
-     $('#feature-info').html(featureInfo)
-
-     // set this lot's polygon feature as the data for the highlight source
-     map.getSource('highlight-feature').setData(hoveredFeature.geometry);
-   } else {
-     // if there is no feature under the mouse, reset things:
-     map.getCanvas().style.cursor = 'default'; // make the cursor default
-
-     // reset the highlight source to an empty featurecollection
-     map.getSource('highlight-feature').setData({
-       type: 'FeatureCollection',
-       features: []
-     });
-
-     // reset the default message
-     $('#feature-info').html(defaultText)
-   }
- })
-})
