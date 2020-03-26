@@ -12,7 +12,7 @@ var initOptions = {
   center: initialCenterPoint, // initial view center
   zoom: initialZoom, // initial view zoom level (0-18)
 };
-
+//credit: http://justintadlock.com/archives/2007/11/07/how-to-create-tabs-using-jquery//
 $(document).ready(function() {
 // setting the tabs in the sidebar hide and show, setting the current tab
 	$('div.tabbed-sidebar div').hide();
@@ -200,7 +200,12 @@ var popup = new mapboxgl.Popup()
 map.on('mouseenter', 'fill-Res', function(e) {
   popup
   .setLngLat(e.lngLat)
-  .setHTML(e.features[0].properties.IND_NAME, e.features[0].properties.POP_TOT)
+  .setHTML(`
+    <div>
+    <p><h2>${e.features[0].properties.IND_NAME}</h2></p>
+    <p>Total population is ${e.features[0].properties.POP_TOT}</p>
+    </div>
+    `)
   .addTo(map);
 });
 
