@@ -25,6 +25,7 @@ body {
   left:-300;
   top: 0;
   bottom:calc(50%-20px);
+  height: 100%;
   width: 300px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #FFF;
@@ -32,6 +33,7 @@ body {
   box-sizing: border-box;
   transition: .3s;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
+  overflow-y: scroll
 }
 
 ul{
