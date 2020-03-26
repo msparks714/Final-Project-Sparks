@@ -177,45 +177,26 @@ $('sidebar').click(function(){
 // When a click event occurs on a feature in the res layer, open a popup at the
 // location of the click, with description HTML from its properties.
 map.on('mouseenter', 'res-layer', function(e) {
-new mapboxgl.Popup()
-.setLngLat(e.lngLat)
-.setHTML(e.features[0].properties.IND_NAME)
-.addTo(map);
+  console.log(e)
+  new mapboxgl.Popup()
+  .setLngLat(e.lngLat)
+  .setHTML(e.features[0].properties.IND_NAME)
+  .addTo(map);
 });
+
 // Change the cursor to a pointer when the mouse is over the states layer.
 map.on('mouseenter', 'res-layer', function() {
 map.getCanvas().style.cursor = 'pointer';
 });
 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'res-layer', function() {
-map.getCanvas().style.cursor = '';
+
+var popup = new mapboxgl.Popup()
+// When a click event occurs on a feature in the res layer, open a popup at the
+// location of the click, with description HTML from its properties.
+map.on('mouseenter', 'fill-Res', function(e) {
+  popup
+  .setLngLat(e.lngLat)
+  .setHTML(e.features[0].properties.IND_NAME, e.features[0].properties.POP_TOT)
+  .addTo(map);
 });
 })
-
-map.on('load', function() {
-map.addSource('ms', {
-  'type': 'geojson',
-  'data': {
-      'type': 'FeatureCollection',
-        'features': [
-        {
-            'type': 'Feature',
-            'properties': {
-              'description':
-
-map.on('click', 'places', function(e) {
-var coordinates = e.features[0].geometry.coordinates.slice();
-var description = e.features[0].properties.description;
-})
-
-  // iterate over each object in cities.geojson
-  citydata[0].features.forEach(function(data){
-    console.log(data);
-    // for each object in the cities, add a popup to the map
-    new mapboxgl.Marker().setLngLat(data.geometry.coordinates)
-      .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setText(`${data.properties.Geography} has ${data.properties.Estimate_Total_Residents} total residents and ${data.properties.field_7} of them are Native American.
-             That is roughly ${data.properties.entire_state_percent} of all residents in their state.`))
-      .addTo(map);
-  }
