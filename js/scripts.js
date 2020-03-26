@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXNwYXJrczcxNCIsImEiOiJjazZsZjl0aXAwYmMzM21uM
 
 // we want to return to this point and zoom level after the user interacts
 // with the map, so store them in variables
-var initialCenterPoint = [-106.8175, 39.1911];
+var initialCenterPoint = [-107.3940, 30.1911];
 var initialZoom = 3.25;
 
 // create an object to hold the initialization options for a mapboxGL map
@@ -12,22 +12,6 @@ var initOptions = {
   center: initialCenterPoint, // initial view center
   zoom: initialZoom, // initial view zoom level (0-18)
 };
-//credit: http://justintadlock.com/archives/2007/11/07/how-to-create-tabs-using-jquery//
-$(document).ready(function() {
-// setting the tabs in the sidebar hide and show, setting the current tab
-	$('div.tabbed-sidebar div').hide();
-	$('div.t1').show();
-	$('div.tabbed ul.sidebar-tabs li.t1 a').addClass('tab-current');
-
-// SIDEBAR TABS
-$('div.tabbed-sidebar ul li a').click(function(){
-	var thisClass = this.className.slice(0,2);
-	$('div.tabbed-sidebar div').hide();
-	$('div.' + thisClass).show();
-	$('div.tabbed-sidebar ul.sidebar-tabs li a').removeClass('tab-current');
-	$(this).addClass('tab-current');
-	});
-});
 
 // create the new map
 var map = new mapboxgl.Map(initOptions);
@@ -208,5 +192,32 @@ map.on('mouseenter', 'fill-Res', function(e) {
     `)
   .addTo(map);
 });
-
+//credit: https://aquoid.com/2010/05/building-a-dynamic-tabbed-sidebar-using-jquery//
+$j = jQuery.noConflict();
+$j('.sidebar-tab .sidebar-tab-content').each(function() {
+    var parentId = this.parentNode.id;
+    var parentClass = this.parentNode.className;
+    parentClass = parentClass.substring(12);
+    $j(this).addClass('sidebar-tab-content-' + parentId);
+    $j(this).addClass(parentClass);
+    $j(this).appendTo(this.parentNode.parentNode.parentNode);
+});
+$j('.tabbed-sidebar ul.sidebar-tabs a').each(function() {
+    var parentId = this.parentNode.id;
+    $j(this).addClass(parentId);
+});
+$j('div.tabbed-sidebar ul.sidebar-tabs li:first').addClass('sidebar-tab-first');
+$j('div.tabbed-sidebar div.sidebar-tab-content:first').addClass('sidebar-tab-content-first');
+$j('div.tabbed-sidebar div.sidebar-tab-content').hide()
+$j('div.sidebar-tab-content-first').show();
+$j('div.tabbed-sidebar ul.sidebar-tabs li.sidebar-tab-first a').addClass('tab-current');
+$j('div.tabbed-sidebar ul.sidebar-tabs li a').click(function(){
+    $j(this).removeClass('tab-current');
+    var thisClass = this.className.substring(12, this.className.length);
+    var parentId = this.parentNode.parentNode.parentNode.id;
+    $j('#' + parentId + '.tabbed-sidebar div.sidebar-tab-content').hide();
+    $j('#' + parentId + '.tabbed-sidebar div.sidebar-tab-content-' + thisClass).show();
+    $j('#' + parentId + '.tabbed-sidebar ul.sidebar-tabs li a').removeClass('tab-current');
+    $j(this).addClass('tab-current');
+})
 });
