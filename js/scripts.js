@@ -220,4 +220,6 @@ $j('div.tabbed-sidebar ul.sidebar-tabs li a').click(function(){
     $j('#' + parentId + '.tabbed-sidebar ul.sidebar-tabs li a').removeClass('tab-current');
     $j(this).addClass('tab-current');
 })
+
+
 });
