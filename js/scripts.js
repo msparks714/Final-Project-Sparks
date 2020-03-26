@@ -176,7 +176,7 @@ $('sidebar').click(function(){
 
 // When a click event occurs on a feature in the res layer, open a popup at the
 // location of the click, with description HTML from its properties.
-map.on('click', 'res-layer', function(e) {
+map.on('mouseenter', 'res-layer', function(e) {
 new mapboxgl.Popup()
 .setLngLat(e.lngLat)
 .setHTML(e.features[0].properties.IND_NAME)
@@ -192,13 +192,30 @@ map.on('mouseleave', 'res-layer', function() {
 map.getCanvas().style.cursor = '';
 });
 })
+
+map.on('load', function() {
+map.addSource('ms', {
+  'type': 'geojson',
+  'data': {
+      'type': 'FeatureCollection',
+        'features': [
+        {
+            'type': 'Feature',
+            'properties': {
+              'description':
+
+map.on('click', 'places', function(e) {
+var coordinates = e.features[0].geometry.coordinates.slice();
+var description = e.features[0].properties.description;
+})
+
   // iterate over each object in cities.geojson
-  citydata[0].features.forEach(function(data) {
+  citydata[0].features.forEach(function(data){
     console.log(data);
     // for each object in the cities, add a popup to the map
     new mapboxgl.Marker().setLngLat(data.geometry.coordinates)
       .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-      .setHTML(`${data.properties.Geography} has ${data.properties.Estimate_Total_Residents} total residents and ${data.properties.field_7} of them are Native American.
+      .setText(`${data.properties.Geography} has ${data.properties.Estimate_Total_Residents} total residents and ${data.properties.field_7} of them are Native American.
              That is roughly ${data.properties.entire_state_percent} of all residents in their state.`))
       .addTo(map);
-  });
+  }
