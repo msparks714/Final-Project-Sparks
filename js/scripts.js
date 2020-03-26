@@ -13,6 +13,22 @@ var initOptions = {
   zoom: initialZoom, // initial view zoom level (0-18)
 };
 
+$(document).ready(function() {
+// setting the tabs in the sidebar hide and show, setting the current tab
+	$('div.tabbed-sidebar div').hide();
+	$('div.t1').show();
+	$('div.tabbed ul.sidebar-tabs li.t1 a').addClass('tab-current');
+
+// SIDEBAR TABS
+$('div.tabbed-sidebar ul li a').click(function(){
+	var thisClass = this.className.slice(0,2);
+	$('div.tabbed-sidebar div').hide();
+	$('div.' + thisClass).show();
+	$('div.tabbed-sidebar ul.sidebar-tabs li a').removeClass('tab-current');
+	$(this).addClass('tab-current');
+	});
+});
+
 // create the new map
 var map = new mapboxgl.Map(initOptions);
 
@@ -60,6 +76,7 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
             'icon': 'viewpoint'
           }
         },
+
         {
           // feature for NYC
           'type': 'Feature',
@@ -113,7 +130,7 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
   });
 
   map.addLayer({
-    'id': 'points',
+    'id': 'citydata',
     'type': 'symbol',
     'source': 'points',
     'layout': {
@@ -126,6 +143,8 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
       'text-offset': [0, 0.6],
       'text-anchor': 'top'
     }
+
+
   });
 
   // event listeners for the fly to buttons
@@ -169,29 +188,14 @@ map.setPaintProperty('water','fill-color', '#9CC6D2')
     });
   });
 
-//sidebar hide
-$('sidebar').click(function(){
-  $('sidebar').toggleClass('active');
-});
-
-// When a click event occurs on a feature in the res layer, open a popup at the
-// location of the click, with description HTML from its properties.
-map.on('mouseenter', 'res-layer', function(e) {
-  console.log(e)
-  new mapboxgl.Popup()
-  .setLngLat(e.lngLat)
-  .setHTML(e.features[0].properties.IND_NAME)
-  .addTo(map);
-});
 
 // Change the cursor to a pointer when the mouse is over the states layer.
-map.on('mouseenter', 'res-layer', function() {
+map.on('mouseenter', 'fill-Res', function() {
 map.getCanvas().style.cursor = 'pointer';
 });
 
-
 var popup = new mapboxgl.Popup()
-// When a click event occurs on a feature in the res layer, open a popup at the
+// When a click event occurs on a feature in the cities layer, open a popup at the
 // location of the click, with description HTML from its properties.
 map.on('mouseenter', 'fill-Res', function(e) {
   popup
@@ -199,4 +203,5 @@ map.on('mouseenter', 'fill-Res', function(e) {
   .setHTML(e.features[0].properties.IND_NAME, e.features[0].properties.POP_TOT)
   .addTo(map);
 });
-})
+
+});

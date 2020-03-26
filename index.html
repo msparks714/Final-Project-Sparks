@@ -15,28 +15,46 @@
 
 
     <!-- the sidebar is fixed width and will contain a title, some text, and buttons -->
-    <div id='sidebar'>
-       <ul>
+    <div id="sidebar" class="tabbed-sidebar">
       <h3>Native American Populations in the US and on Reservations</h3>
-      <p>Ever wonder how many registered tribe members live on a reservation?</p>
-      <p>Explore the top 5 cities that Native Americans, by number, live in.</p>
-      <hr/>
-      <br/>
-      <!-- Buttons for flying the map -->
-      <button class='flyto-button' id="losangeles">✈️ Los Angeles, CA</button>
-      <br/>
-      <button class='flyto-button' id="anchorage">✈️ Anchorage, AK</button>
-      <br/>
-      <button class='flyto-button' id="oklahomacity">✈️ Oklahoma City, OK</button>
-      <br/>
-      <button class='flyto-button' id="phoenix">✈️ Phoenix, AZ</button>
-      <br/>
-      <button class='flyto-button' id="nyc">🗽 NYC, NY</button>
+       <ul class="sidebar-tabs">
+         <li id="t1" class="sidebar-tab t1"><a class="sidebar-tab t1" title="Tab 1">Introduction </a></li>
+         <li id="t2" class="sidebar-tab t2"><a class="sidebar-tab t2" title="Tab 2">City Info</a></li>
+       <li id="t3" class="sidebar-tab t3"><a class="sidebar-tab t3" title="Tab 3">Reservation Info</a></li>
+       <li id="t4" class="sidebar-tab t4"><a class="sidebar-tab t4" title="Tab 4">Developer and Credits</a></li>
+    <ul>
+
+       <!-- tab 1-->
+           <div class="sidebar-tab-content sidebar-tab-content-t1">
+
+           <!--Put content for each tab here -->
+           <ul>
+               <li>Ever wonder how many registered tribe members live on a reservation?
+              <p>Explore the top 5 cities that Native Americans, by number, live in.</p>
+              <p> For more information on each tribe, please visit the about section of this window </p>
+              <hr/>
+              <br/>
+              <!-- Buttons for flying the map -->
+              <button class='flyto-button' id="losangeles">✈️ Los Angeles, CA</button>
+              <br/>
+              <button class='flyto-button' id="anchorage">✈️ Anchorage, AK</button>
+              <br/>
+              <button class='flyto-button' id="oklahomacity">✈️ Oklahoma City, OK</button>
+              <br/>
+              <button class='flyto-button' id="phoenix">✈️ Phoenix, AZ</button>
+              <br/>
+              <button class='flyto-button' id="nyc">🗽 NYC, NY</button>
+            </ul>
+        <button class="sidebarBtn">
+          <span></span>
+        </button>
+      </div> </li>
+
     </ul>
-<button class="sidebarBtn">
-  <span></span>
-</button>
-</div>
+
+</div><!-- tabbed-sidebar -->
+
+
 
 
     <!-- Load mapboxGL, jQuery, then our local javascript files -->
